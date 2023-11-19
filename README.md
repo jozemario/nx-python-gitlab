@@ -74,6 +74,7 @@ nx generate @nxlv/python:poetry-project ops-proj1 \
 --projectType application \
 --description='OPS Project 1' \
 --packageName=ops-proj1 \
---moduleName=ops_proj1
+--moduleName=ops_proj1 \
+--directory=packages
 
 ```
