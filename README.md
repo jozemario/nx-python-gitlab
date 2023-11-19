@@ -34,27 +34,6 @@ nx run-many -t <target1> <target2> -p <proj1> <proj2>
 
 Targets can be defined in the `package.json` or `projects.json`. Learn more [in the docs](https://nx.dev/core-features/run-tasks).
 
-## Want better Editor Integration?
-
-Have a look at the [Nx Console extensions](https://nx.dev/nx-console). It provides autocomplete support, a UI for exploring and running tasks & generators, and more! Available for VSCode, IntelliJ and comes with a LSP for Vim users.
-
-## Ready to deploy?
-
-Just run `nx build demoapp` to build the application. The build artifacts will be stored in the `dist/` directory, ready to be deployed.
-
-## Set up CI!
-
-Nx comes with local caching already built-in (check your `nx.json`). On CI you might want to go a step further.
-
-- [Set up remote caching](https://nx.dev/core-features/share-your-cache)
-- [Set up task distribution across multiple machines](https://nx.dev/nx-cloud/features/distribute-task-execution)
-- [Learn more how to setup CI](https://nx.dev/recipes/ci)
-
-## Connect with us!
-
-- [Join the community](https://nx.dev/community)
-- [Subscribe to the Nx Youtube Channel](https://www.youtube.com/@nxdevtools)
-- [Follow us on Twitter](https://twitter.com/nxdevtools)
 
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
@@ -67,7 +46,34 @@ npm i -g yarn nx
 
 npx create-nx-workspace nx-python-gitlab --preset=npm 
 
+
+@nxlv/python
+https://github.com/lucasvieirasilva/nx-plugins/blob/main/packages/nx-python/README.md
+
+The @nxlv/python plugin is designed to extend Nx’s features with Python projects, and it is based on Poetry.
+
+Poetry is a dependency management and packaging tool for Python. It aims to be a more user-friendly alternative to tools like pip and virtualenv and focuses on simplifying the process of managing dependencies and publishing Python packages.
+
+Some key features of the @nxlv/python include the following:
+
+Local dependencies: It uses the Poetry config (pyproject.toml) to identify the local dependencies and let Nx manage the dependency graph.
+Built-in executors: Support for linting, testing, and build tasks.
+Embed local dependencies: A project could have multiple local dependencies. In the build time, the @nxlv/python embeds the local code and the external dependencies, so the build artifact file does not require any local dependency to be published to use it.
+Isolate dependencies: By default, the @nxlv/python manages the projects individually, so all the projects have one set of dependencies and virtual environments.
+Shared virtual environment: When the project contains many external dependencies, installing the dependencies for each project individually becomes a long and heavy task. To solve this issue, if the project contains a pyproject.toml at the root, you can use the root project config to manage all projects. This way, you only need to install the dependencies at the root level. However, this feature requires all the projects to avoid dependency conflicts between them.
+Serverless framework: Support serverless framework features to package and deploy
+
+
 npm install @nxlv/python --save-dev
 
+add plugins to nx.json
+ "plugins": ["@nxlv/python"]
+
+
+nx generate @nxlv/python:poetry-project ops-proj1 \
+--projectType application \
+--description='OPS Project 1' \
+--packageName=ops-proj1 \
+--moduleName=ops_proj1
 
 ```
